@@ -1,5 +1,5 @@
 # SimulacaoBrasileirao
-
+Simulação do Brasileirão 2024 a partir da 31° rodada.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
 
 ## Development server
