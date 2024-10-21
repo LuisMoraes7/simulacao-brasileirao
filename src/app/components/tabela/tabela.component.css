@@ -1,8 +1,4 @@
-.teamimage{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
+
 
 
 .mat-header-cell, .mat-cell{
@@ -28,7 +24,7 @@
 .mat-mdc-table{
     min-width: 0%;
     
-    height: 500px;
+    height: 200px;
 }
 .mat-table{
     table-layout: fixed;
@@ -36,19 +32,33 @@
     margin: 0 auto;
 }
 
+.no-margin{
+    margin: 0;
+}
+
 table{
     background-color: white;
     border: 1px solid rgba(165, 165, 165, 0.61);
     border-collapse: collapse;
-    
+    box-sizing: border-box;
     & th, td{
-        border: 1px solid rgba(165, 165, 165, 0.61);;
+        border: 1px solid rgba(165, 165, 165, 0.61);
+        box-sizing: border-box;
         color: black;
         width: 1px;
-        
+        font-size: 12px;
         height: 10px;
     }
 
+}
+
+
+.container, .position, .name{
+    box-sizing: border-box;
+}
+td{
+    min-height: 40px;
+    line-height: 40px;
 }
 
 .container{
@@ -56,3 +66,26 @@ table{
     gap: 10px;
 
 }
+
+@media (min-width: 846px) {
+    main{
+        
+        gap: 50px;
+        flex-direction: row;    
+    }
+
+    .mat-mdc-table{
+        min-width: 0%;
+        
+        height: 300px;
+        width: 400px;
+    }
+}
+
+main{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+

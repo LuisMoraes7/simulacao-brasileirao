@@ -15,28 +15,36 @@ import { MatSort } from '@angular/material/sort';
   styleUrl: './tabela.component.css'
 })
 export class TabelaComponent {
- 
+ sortedTeams: Team[] = []
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private teamService: TeamsServiceService){
     this.getTeams()
+    
   }
   getTeams(): void{
     this.teamService.getTeams().subscribe({
       next: (teams: Team[]) => {
-        this.dataSource.data = teams.sort((a, b) => a.index - b.index)
-        this.dataSource.sort = this.sort
-        console.log(this.dataSource)
+        this.sortedTeams = teams.sort((a, b) => a.index - b.index)
+        this.dataSourceTop10.data = this.sortedTeams.slice(0, 10)
+        this.dataSourceBottom10.data = this.sortedTeams.slice(10, 20)
+        this.dataSourceTop10.sort = this.sort
+        this.dataSourceBottom10.sort = this.sort
+        console.log(this.dataSourceTop10)
+        console.log(this.dataSourceBottom10)
       }, error: (err) => {
         console.error('Errooo: ', err)
       }
     })
   }
 
-
+  
   displayedColumns: string[] = ['number', 'P', 'J', 'V', 'SG', 'GP']
-  dataSource = new MatTableDataSource<Team>([])
-
+  
+  dataSourceTop10 = new MatTableDataSource<Team>([])
+  dataSourceBottom10 = new MatTableDataSource<Team>([])
+  
   getColor(num?: number): string{
+    
     if (num != null) {
       if (num <= 4){
         return 'blue'
