@@ -1,0 +1,58 @@
+.teamimage{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+
+.mat-header-cell, .mat-cell{
+    font-size: 12px;
+}
+
+.position{
+    display: inline-block;
+}
+
+
+.alternate{
+    background-color: rgba(221, 219, 219, 0.651);
+}
+
+.first{
+    font-weight: bolder;
+}
+
+.name{
+    display: inline-block;
+}
+.mat-mdc-table{
+    min-width: 0%;
+    
+    height: 500px;
+}
+.mat-table{
+    table-layout: fixed;
+    width: auto;
+    margin: 0 auto;
+}
+
+table{
+    background-color: white;
+    border: 1px solid rgba(165, 165, 165, 0.61);
+    border-collapse: collapse;
+    
+    & th, td{
+        border: 1px solid rgba(165, 165, 165, 0.61);;
+        color: black;
+        width: 1px;
+        
+        height: 10px;
+    }
+
+}
+
+.container{
+    display: flex;
+    gap: 10px;
+
+}

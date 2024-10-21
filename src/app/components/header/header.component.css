@@ -1,0 +1,15 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+mat-toolbar{
+    background-color: blue;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+mat-menu{
+    background-color: blue;
+    color: blue;
+    text-decoration: underline;
+}
