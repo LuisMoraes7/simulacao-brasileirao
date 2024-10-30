@@ -1,5 +1,69 @@
 .teamimage{
-    width: 60px;
-    height: 60px;
+    width: 26px;
+    height: 26px;
     object-fit: contain;
+}
+
+.container{
+    /* display: flex;
+    /* background-color: rgb(0, 255, 106); */
+    /* align-items: center;
+    margin-bottom: 5px;
+    gap: 5px; */
+    display: grid;
+    grid-template-columns: 129px 25px 160px 9px;
+    justify-items: center;
+    align-items: center;
+}
+
+.team-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]{
+    
+    text-align: center;
+}
+
+span{
+    color: rgb(175, 175, 175);
+    text-align: center;
+}
+
+.containermaster{
+    display: flex;
+    background-color: green;
+}
+
+#containermega{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 
+#match-container{
+    display: grid;
+    grid-template-columns: 500px 500px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+} */
+
+input{
+    width: 22px;
+    height: 22px;
+    padding: 4px;
+    background-color: rgb(209, 208, 208);
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+    font-weight: bolder;
+    
 }

@@ -15,12 +15,25 @@ import { MatSort } from '@angular/material/sort';
   styleUrl: './tabela.component.css'
 })
 export class TabelaComponent {
+  
  sortedTeams: Team[] = []
+
+  ngOnInit(): void{
+    const storedData = localStorage.getItem('teamData')
+    if (storedData){
+      this.sortedTeams = JSON.parse(storedData)
+    } else{
+      this.getTeams()
+    }
+  }
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private teamService: TeamsServiceService){
-    this.getTeams()
-    
+      this.teamService.teams$.subscribe((teams: Team[]) => {
+        this.getTeams()
+      })
   }
+
+  
   getTeams(): void{
     this.teamService.getTeams().subscribe({
       next: (teams: Team[]) => {
@@ -31,6 +44,8 @@ export class TabelaComponent {
         this.dataSourceBottom10.sort = this.sort
         console.log(this.dataSourceTop10)
         console.log(this.dataSourceBottom10)
+
+        // localStorage.setItem('teamData', JSON.stringify(teams))
       }, error: (err) => {
         console.error('Errooo: ', err)
       }

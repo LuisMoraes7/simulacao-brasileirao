@@ -1,4 +1,37 @@
-<p>palpites works!</p>
-@for (team of teams; track team.index) {
-    <img src="{{team.image}}" alt="" class="teamimage">
-}
+<!-- <section *ngFor="let round of rounds">
+    <span>Flecha pra esquerda</span>
+    <span *ngIf="round.rodada == 31">{{round.rodada}}</span>
+    <span>Flecha pra direita</span>
+</section> -->
+
+<div *ngFor="let round of rounds; let i = index" id="containermega">
+    <div *ngIf="round.rodada == 31" id="match-container">
+      <div >
+        <div class="container"> 
+          <div class="team-info">
+            {{ resumeName(round.time1) }}
+            @for (team of teams; track team.index) {
+              <div *ngIf="round.time1 == team.team">
+                <img src="{{ team.image }}" alt="" class="teamimage" />
+              </div>
+          }
+             <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time1Guess"  (input)="validateInput($event, round.time1)">
+          </div>
+          <span>X</span>
+          <div class="team-info">
+            <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time2Guess"  (input)="validateInput($event, round.time2)">
+            @for(team of teams; track team.index){
+              <div *ngIf="round.time2 == team.team">
+                <img src="{{ team.image }}" alt="" class="teamimage" />
+              </div>
+            }
+            {{ resumeName(round.time2) }}
+            <button (click)="submitGuess(round.time1, round.time2, i)">Enviar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+

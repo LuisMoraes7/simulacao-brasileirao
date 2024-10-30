@@ -1,4 +1,11 @@
-
+app-palpites {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
 
 
 .mat-header-cell, .mat-cell{
