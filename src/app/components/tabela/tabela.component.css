@@ -1,17 +1,8 @@
 
 .update-table{
-    background-color: green;
-    transition: highlight 1.5s infinite;
-    padding: 2000px;
+    background-color: rgb(0, 255, 34);
 }
 
-
-@keyframes highlight {
-    0% {background-color: black;}
-    50%{background-color: rgba(0, 128, 0, 0.438);}
-    100%{background-color: green;}
-    
-}
 
 .mat-header-cell, .mat-cell{
     font-size: 12px;
@@ -38,13 +29,13 @@ section{
 }
 
 
-.alternate{
+/* .alternate{
     background-color: rgba(221, 219, 219, 0.651);
 }
 
 .first{
     font-weight: bolder;
-}
+} */
 
 .name{
     display: inline-block;
