@@ -3,8 +3,8 @@
   
     <ng-container matColumnDef="number">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="width: 250px;"> Classificação </th>
-      <td mat-cell style="width: 250px;" *matCellDef="let element">
-          <div class="container">
+      <td mat-cell style="width: 250px;" *matCellDef="let element" [ngStyle]="{'background-color': getBackColor(element.updated)}">
+          <div class="container" >
               <div class="position" [ngStyle]="{'color': getColor(element.index)}">{{element.index}}</div>
               <div class="name">{{element.team}}</div>
           </div>
@@ -30,7 +30,7 @@
     </ng-container>
   
     <ng-container matColumnDef="SG">
-      <th mat-header-cell *matHeaderCellDef style="width: 20px;padding-left: 12px;padding-right: 28px;"> SG </th>
+      <th mat-header-cell *matHeaderCellDef style="width: 20px;padding-left: 12px;padding-right: 12px;"> SG </th>
       <td mat-cell *matCellDef="let element" style="width: 20px;"> {{element.saldo}} </td>
     </ng-container>
   
@@ -68,14 +68,13 @@
     </ng-container>
   
   
-    <ng-container matColumnDef="V">
+    <ng-container matColumnDef="V" >
       <!-- <th mat-header-cell *matHeaderCellDef style="width: 20px;" class="alternate"> V </th> -->
       <td mat-cell *matCellDef="let element" style="width: 20px;" class="alternate"> {{element.vitorias}} </td>
     </ng-container>
   
     <ng-container matColumnDef="SG">
-      <!-- <th mat-header-cell *matHeaderCellDef style="width: 20px;"> SG </th> -->
-      <td mat-cell *matCellDef="let element" style="width: 20px;padding-left: 16.5px;padding-right: 22px;">{{element.saldo}}</td>
+      <td mat-cell *matCellDef="let element" >{{element.saldo}}</td>
     </ng-container>
   
     <ng-container matColumnDef="GP">
@@ -84,8 +83,17 @@
     </ng-container>
   
     <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'update-table': row.updated}"></tr>
   </table>
 </main>
 
-<app-palpites [teams]="sortedTeams"></app-palpites>
+<section>
+  <button mat-icon-button class="arrow" (click)="decreaseButton()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  {{round_value}}
+  <button mat-icon-button class="arrow" (click)="increaseButton()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</section>
+<app-palpites [teams]="sortedTeams" [round_value]="round_value"></app-palpites>

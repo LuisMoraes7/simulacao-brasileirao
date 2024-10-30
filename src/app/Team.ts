@@ -7,4 +7,5 @@ export interface Team{
     vitorias: number;
     saldo: number;
     gols: number;
+    updated?: boolean;
 }

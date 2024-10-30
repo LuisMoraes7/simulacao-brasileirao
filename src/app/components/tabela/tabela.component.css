@@ -1,15 +1,36 @@
-app-palpites {
-    display: grid;
-    grid-template-columns: 500px 500px;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
+
+.update-table{
+    background-color: green;
+    transition: highlight 1.5s infinite;
+    padding: 2000px;
 }
 
 
+@keyframes highlight {
+    0% {background-color: black;}
+    50%{background-color: rgba(0, 128, 0, 0.438);}
+    100%{background-color: green;}
+    
+}
+
 .mat-header-cell, .mat-cell{
     font-size: 12px;
+}
+
+button.arrow{
+    background-color: transparent;
+    border: none;
+    color: #746FD1;
+    &:hover{
+        cursor: pointer;
+        color: #131222;
+    }
+}
+
+section{
+    display: flex;
+    justify-content: space-around;
+    
 }
 
 .position{
@@ -74,7 +95,19 @@ td{
 
 }
 
+app-palpites{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+}
 @media (min-width: 846px) {
+    app-palpites {
+        display: grid;
+        grid-template-columns: 500px 500px;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 15px;
+    }
     main{
         
         gap: 50px;
