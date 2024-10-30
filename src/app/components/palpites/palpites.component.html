@@ -12,11 +12,11 @@
                 <img src="{{ team.image }}" alt="" class="teamimage" />
               </div>
           }
-             <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time1Guess" (ngModelChange)="checkSubmitGuess(i)" (input)="validateInput($event, round.time1)" [disabled]="pressedButton[i]" [placeholder]="0">
+             <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time1Guess" (input)="validateInput($event)" [disabled]="pressedButton[i]" [placeholder]="0">
           </div>
           <span>X</span>
           <div class="team-info">
-            <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time2Guess" (ngModelChange)="checkSubmitGuess(i)" (input)="validateInput($event, round.time2)" [disabled]="pressedButton[i]" [placeholder]="0">
+            <input type="number" min="0" max="9" [(ngModel)]="guesses[i].time2Guess" (input)="validateInput($event)" [disabled]="pressedButton[i]" [placeholder]="0">
             @for(team of teams; track team.index){
               <div *ngIf="round.time2 == team.team">
                 <img src="{{ team.image }}" alt="" class="teamimage" />
@@ -25,13 +25,13 @@
             {{ resumeName(round.time2) }}
             
               <div *ngIf="pressedButton[i] == true; else FieldEdit">
-                <button (click)="submitGuess(round.time1, round.time2, i); functionrandom(i)" class="submitButton">
+                <button (click)="submitGuess(round.time1, round.time2, i); changePressedButtonState(i)" class="submitButton">
                   Editar
                 </button>
               </div>
               <ng-template #FieldEdit>
                 
-                <button (click)="submitGuess(round.time1, round.time2, i); functionrandom(i)" class="submitButton">
+                <button (click)="submitGuess(round.time1, round.time2, i); changePressedButtonState(i)" class="submitButton">
                   Enviar
                 </button>
               </ng-template>

@@ -20,16 +20,18 @@ interface Guess{
   styleUrl: './palpites.component.css'
 })
 export class PalpitesComponent {
+  //* o sortedTeams repassado no componente anterior. Aqui são os times ordenados
   @Input() teams!: Team[]
   rounds!: Rodada[]
+  //* recebe o número da rodada
   @Input() round_value!: number
   
-
+  //? junto com o componente, já é criado as suas rodadas.
   constructor(private RoundService: RoundsServiceService, private TeamsService: TeamsServiceService) {
     this.getRounds()
   }
 
-  numberRounds: Number[] = [31, 32, 33, 34, 35, 36, 37, 38]
+  //! Lógica rápida para resumir o nome dos times.
   resumeName(name: string): string{
     if (name == "Atlético-MG"){
       return 'CAM'
@@ -49,7 +51,7 @@ export class PalpitesComponent {
     }
   }
 
-  
+  //! Lógica para os resultados que o usuário passa. Análise do vencedor, perdedor ou caso de empate. Também analisa se o botão "Enviar" foi pressionado. Caso sim, ele entende que é necessário "anular" a rodada. Isso é feito por meio do index, que indica ao sistema qual rodada está sendo alterada.
   rodada(time1: Team | undefined, time2: Team | undefined, goals1: number | null, goals2: number | null, index: number){
     if (time1 != undefined && time2 != undefined && goals1 != null && goals2 != null){
       let result: string  
@@ -57,9 +59,7 @@ export class PalpitesComponent {
         result = time1.team
       } else if (goals2 > goals1){
         result = time2.team
-      } else if (this.pressedButton[index] == true){
-        result = 'none'
-      }else{
+      } else{
         result = 'Empate'
       }
       let diferenca = goals1 - goals2
@@ -122,12 +122,9 @@ export class PalpitesComponent {
         } else{
           
           if (this.pressedButton[index] == true){
-            console.log('to varrendo')
             time2.saldo -= diferenca
             time2.saldo += diferenca
           } else{
-            console.log('se liga no pressedbutton')
-            console.log(this.pressedButton[index])
             time2.saldo += diferenca
             time1.saldo -= diferenca
           }
@@ -141,37 +138,18 @@ export class PalpitesComponent {
           time2.points += 1
         }
       }
-      
-      // * checar aqui o valor de pressedbutton
-    } else{
-      
     }
-    
-    
   }
   
-  checkSubmitGuess(index: number): void{
-    // const time1Guess = this.guesses[index].time1Guess
-    // const time2Guess = this.guesses[index].time2Guess
-    // if (time1Guess != null && time2Guess != null){
-    //   this.submitGuess(this.rounds[index].time1, this.rounds[index].time2, index)
-    // }
-  }
+
   pressedButton: boolean[] = []
-  functionrandom(i: number){
-    console.log('to mudando o pressbutton aqui')
+  //? mudando o estado do pressedButton, quando o usuário apertar o botão na tela.
+  changePressedButtonState(i: number){
     this.pressedButton[i] = !this.pressedButton[i]
-    console.log('oooooo')
-    console.log(this.pressedButton[i])
-    const time1Guess = this.guesses[i].time1Guess
-    const time2Guess = this.guesses[i].time2Guess
-    if (time1Guess == null && time2Guess == null){
-      time1Guess == 0;
-      time2Guess == 0;
-    }
   }
   
-  validateInput(event: any, time: string){
+  //? corrige o input do usuario caso seja menor que 0 ou maior que 9.
+  validateInput(event: any){
     const input = event.target as HTMLInputElement
     let value = parseInt(input.value, 10)
     if (value < 0){
@@ -179,12 +157,9 @@ export class PalpitesComponent {
     } else if (value > 9){
       input.value = '9'
     }
-    
-    
-    
-    
   }
   
+  //? pega o nome do time e procura no array de times, repassado pelo componente tabela. Ele retorna o objeto do time.
   traduceTeam(teamName: string){
     const traducedTeam = this.teams.find(team => team.team === teamName)
     return traducedTeam
@@ -193,45 +168,52 @@ export class PalpitesComponent {
 
   
   guesses: Guess[] = []
+  //! essencial para a aplicação, pois cada rodada é individual e precisa que o botão ao seu lado trabalhe somente sobre aquela partida. Também é sobre os palpites, chamados guesses, tornando cada input único para a partida. Isso é feito por meio do tamanho do array das rodadas.
   ngOnInit(){
     this.rounds.forEach(() => {
       this.guesses.push({ time1Guess: null, time2Guess: null});
       this.pressedButton.push(false)
     })
     }
-    
-    submitGuess(time1: string, time2: string, index: number){
+  
+  //! envia o input do usuário para a função de rodadas.
+  submitGuess(time1: string, time2: string, index: number){
       const time1Obj = this.traduceTeam(time1)
       const time2Obj = this.traduceTeam(time2)
       const guess1 = this.guesses[index].time1Guess
       const guess2 = this.guesses[index].time2Guess
-      console.log(guess1, 'guess1')
-      if (guess1 == null && guess2 == null){
-        if (time1Obj && time2Obj !== undefined){
+      //? checando se os times estão realmente sendo passados.
+      if (time1Obj && time2Obj !== undefined){
+        //? analisando se o usuário passa os inputs numericos.
+        if (guess1 == null && guess2 == null){
+          console.log('zeca')
           this.rodada(time1Obj, time2Obj, 0, 0, index)
           this.TeamsService.updateTeam(time1Obj)
           this.TeamsService.updateTeam(time2Obj)
-        }
-      } else{
-        if (time1Obj && time2Obj !== undefined){
+        } else if(guess1 == null && guess2 != null){
+          this.rodada(time1Obj, time2Obj, 0, guess2, index)
+          this.TeamsService.updateTeam(time1Obj)
+          this.TeamsService.updateTeam(time2Obj)
+        } else if (guess1 != null && guess2 == null){
+          this.rodada(time1Obj, time2Obj, guess1, 0, index)
+          this.TeamsService.updateTeam(time1Obj)
+          this.TeamsService.updateTeam(time2Obj)
+        } else{
           this.rodada(time1Obj, time2Obj, guess1, guess2, index)
           this.TeamsService.updateTeam(time1Obj)
           this.TeamsService.updateTeam(time2Obj)
-
+        }
       }
-
-      }
-  }
+    }
   
 
   getRounds(): void{
     this.RoundService.getRounds().subscribe({
+      //! ordena as rodadas por número de rodada.
       next: (rounds: Rodada[]) => {
         this.rounds = rounds.sort((a, b) => a.rodada - b.rodada)
-        // console.log('to te passando os rounds ')
-        // console.log(this.rounds)
       }, error: (err) => {
-        console.error('Errooo: ', err)
+        console.error('Erro na composição das rodadas: ', err)
       }
     })
   }
