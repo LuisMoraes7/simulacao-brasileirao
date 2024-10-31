@@ -68,15 +68,11 @@ export class PalpitesComponent {
         time2.jogos -= 1
         time1.gols -= goals1
         time2.gols -= goals2
-        console.log('se liga no pressedbuttaooon')
-        console.log(this.pressedButton[index])
       } else{
         time1.jogos += 1
         time2.jogos += 1
         time1.gols += goals1
         time2.gols += goals2
-        console.log('se liga no pressedbuttonnn')
-        console.log(this.pressedButton[index])
       }
       if (result == time1.team){
         if (this.pressedButton[index] == true){
@@ -191,7 +187,6 @@ export class PalpitesComponent {
       if (time1Obj && time2Obj !== undefined){
         //? analisando se o usuário passa os inputs numericos.
         if (guess1 == null && guess2 == null){
-          console.log('zeca')
           this.rodada(time1Obj, time2Obj, 0, 0, index)
           this.TeamsService.updateTeam(time1Obj)
           this.TeamsService.updateTeam(time2Obj)
