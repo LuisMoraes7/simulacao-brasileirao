@@ -11,10 +11,10 @@ button.arrow {
   background-color: transparent;
   border: none;
   color: #746fd1;
-  &:hover {
-    cursor: pointer;
-    color: #131222;
-  }
+}
+button.arrow:hover{
+  cursor: pointer;
+  color: #131222;
 }
 
 section {
@@ -60,6 +60,10 @@ table {
     font-size: 12px;
     height: 10px;
   }
+}
+
+.pontos{
+  font-weight: bolder;
 }
 
 .container,

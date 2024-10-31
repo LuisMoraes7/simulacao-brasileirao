@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class TabelaComponent {
   
  sortedTeams: Team[] = []
- round_value = 31
+ round_value = 32
 
  //! Aumenta o valor de round_value
 increaseButton(){
@@ -28,7 +28,7 @@ increaseButton(){
 }
 //! Diminui o valor de round_value
 decreaseButton(){
-  if (this.round_value > 31){
+  if (this.round_value > 32){
     this.round_value -= 1
   }
 }
@@ -51,11 +51,10 @@ decreaseButton(){
 
     this.sortedTeams = teams.sort((a, b) => {
       if (b.points === a.points){
-        if (b.saldo === a.saldo){
-          return b.vitorias - a.vitorias
+        if (b.vitorias === a.vitorias){
+          return b.saldo - a.saldo
         }
-        return b.saldo - a.saldo
-        
+        return b.vitorias - a.vitorias
       }
       return b.points - a.points
       
@@ -108,6 +107,17 @@ decreaseButton(){
         return 'rgb(0, 255, 34)'
       } else{
         return undefined
+      }
+    }
+
+    //! função para reforçar visualmente que a partir da última rodada a seta direita fica irrelevante e na primeira rodada a seta esquerda também.
+    getArrowColor(currentArrow: string, currentRound: number): string{
+      if (currentRound == 32 && currentArrow == 'back'){
+        return 'gray'
+      } else if (currentRound == 38 && currentArrow == 'forward'){
+        return 'gray'
+      } else{
+        return ''
       }
     }
 }

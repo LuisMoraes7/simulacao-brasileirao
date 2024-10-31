@@ -14,7 +14,7 @@
   
     <ng-container matColumnDef="P">
       <th mat-header-cell style="width: 20px;" *matHeaderCellDef> P </th>
-      <td mat-cell style="width: 20px;" *matCellDef="let element"> {{element.points}} </td>
+      <td mat-cell style="width: 20px;" *matCellDef="let element" class="pontos"> {{element.points}} </td>
     </ng-container>
   
   
@@ -56,7 +56,7 @@
   
   
     <ng-container matColumnDef="P">
-      <td mat-cell style="width: 20px;" *matCellDef="let element"> {{element.points}} </td>
+      <td mat-cell style="width: 20px;" *matCellDef="let element" class="pontos"> {{element.points}} </td>
     </ng-container>
   
   
@@ -81,11 +81,11 @@
 </main>
 
 <section>
-  <button mat-icon-button class="arrow" (click)="decreaseButton()">
+  <button mat-icon-button class="arrow" [ngStyle]="{'color': getArrowColor('back', round_value)}" (click)="decreaseButton()">
     <mat-icon>arrow_back</mat-icon>
   </button>
   {{round_value}}
-  <button mat-icon-button class="arrow" (click)="increaseButton()">
+  <button mat-icon-button class="arrow" [ngStyle]="{'color': getArrowColor('forward', round_value)}" (click)="increaseButton()">
     <mat-icon>arrow_forward</mat-icon>
   </button>
 </section>
