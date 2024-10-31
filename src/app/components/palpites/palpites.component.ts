@@ -152,11 +152,16 @@ export class PalpitesComponent {
   validateInput(event: any){
     const input = event.target as HTMLInputElement
     let value = parseInt(input.value, 10)
+    if (isNaN(value)){
+      input.value = '0'
+    }
     if (value < 0){
       input.value = '0'
     } else if (value > 9){
       input.value = '9'
-    }
+    } else {
+      input.value = Math.floor(value).toString()
+   }
   }
   
   //? pega o nome do time e procura no array de times, repassado pelo componente tabela. Ele retorna o objeto do time.
