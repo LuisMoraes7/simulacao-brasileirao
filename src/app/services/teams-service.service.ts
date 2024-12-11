@@ -6,7 +6,7 @@ import { Team } from '../Team';
   providedIn: 'root'
 })
 export class TeamsServiceService {
-  private Url = 'https://luismoraes7.github.io/Testes/brazilianteams.json'
+  private Url = 'https://luismoraes7.github.io/myself/brazilianteams.json'
 
   // ? faz a requisição HTTP.
   getTeams(): void{
